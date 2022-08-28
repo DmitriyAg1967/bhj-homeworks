@@ -1,14 +1,13 @@
-let sub_Menu_list = Array.from(document.getElementsByClassName('menu__link'));
-console.log(sub_Menu_list)
+let subMenulist = Array.from(document.getElementsByClassName('menu__link'));
 
-for(let i =0; i<sub_Menu_list.length; i++) {
-    if(sub_Menu_list[i].closest('li').querySelector('ul')){
-       let element = sub_Menu_list[i].closest('li').querySelector('a');
-       element.addEventListener('click', sub_Menu_show);
+for(let i =0; i<subMenulist.length; i++) {
+    if(subMenulist[i].closest('li').querySelector('ul')){
+       let element = subMenulist[i].closest('li').querySelector('a');
+       element.addEventListener('click', subMenuShow);
     }
 }
 
-function sub_Menu_show(e) {
+function subMenuShow(e) {
     e.preventDefault();
     this.closest('li').querySelector('ul').classList.toggle("menu_active");
 }

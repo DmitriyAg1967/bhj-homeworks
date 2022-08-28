@@ -1,27 +1,26 @@
-const slide_show = document.querySelectorAll('.slider__item');
-const right = document.querySelector('.slider__arrow_next');
-const left = document.querySelector('.slider__arrow_prev');
+let clickLeft = document.getElementsByClassName('slider__navigation').item(0).querySelector(".slider__arrow_next");
+let clickRight = document.getElementsByClassName('slider__navigation').item(0).querySelector(".slider__arrow_prev");
+let sliderImagesArray = Array.from(document.getElementsByClassName('slider__item'));
 
-let slide_number = 0;
+clickLeft.onclick = goToNext;
+clickRight.onclick = goToPrev;
 
-right.onclick = function right_click () {
-    slide_number++;
-    for( let slide of Array.from(slide_show)){
-        slide.className ='slider__item';
-    }
-    if(slide_number >= slide_show.length){
-        slide_number=0;
-    }
-    slide_show[slide_number].className='slider__item slider__item_active';
-};
+function goToNext() {
+    let indexActiveSlide = sliderImagesArray.findIndex(searchActiveSlide);
+    sliderImagesArray[indexActiveSlide].classList.remove('slider__item_active');
+    let nextIndex = indexActiveSlide === sliderImagesArray.length - 1 ? 0 : indexActiveSlide + 1;
+    sliderImagesArray[nextIndex].classList.add('slider__item_active');
+}
 
-left.onclick = function left_click () {
-    slide_number--;
-    for( let slide of Array.from(slide_show)){
-        slide.className ='slider__item';
+function goToPrev() {
+    let indexActiveSlide = sliderImagesArray.findIndex(searchActiveSlide);
+    sliderImagesArray[indexActiveSlide].classList.remove('slider__item_active');
+    let nextIndex = indexActiveSlide === 0 ? sliderImagesArray.length - 1 : indexActiveSlide - 1;
+    sliderImagesArray[nextIndex].classList.add('slider__item_active');
+}
+
+function searchActiveSlide(i) {
+    if (i.className === "slider__item slider__item_active") {
+        return i;
     }
-    if(slide_number < 0){
-        slide_number = slide_show.length-1;
-    }
-    slide_show[slide_number].className='slider__item slider__item_active';
-};
+}
